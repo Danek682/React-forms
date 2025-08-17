@@ -30,11 +30,11 @@ export function TrainingRecords () {
 
    
     function CheckValueInput (value) {
-        if(!/^\d*$/.test(value)) {
+        if(!/^\d*\.?\d*$/.test(value)) {
             alert ("Доступны только числа!")
             return ""
         }
-        if (value.length > 4) {
+        if (value.length > 5) {
             return value.slice(0,4)
         }
         return value
