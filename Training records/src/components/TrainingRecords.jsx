@@ -14,16 +14,17 @@ export function TrainingRecords () {
     }
     const newRecord = { date, km: parseFloat(km) };
     setRecord(prev => {
-        const findedValue = prev.findIndex(item => item.date === newRecord.date);
-        let newValue;
-        if (findedValue >= 0) {
-            newValue = [...prev];
-            newValue[findedValue].km += newRecord.km;
-        } else {
-            newValue = [...prev, newRecord];
+        const findedValue = prev.some(item => item.date  === newRecord.date)
+        let newValue 
+        if (findedValue === true) {
+            newValue = prev.map((item) => {
+                return ({...item, km: item.km + newRecord.km})
+            })
+        }   else {
+            newValue = [...prev, newRecord]
         }
-        return newValue.sort((a, b) => new Date(a.date) - new Date(b.date));
-    });
+      return newValue.sort((a, b) => new Date(a.date) - new Date(b.date));
+    })
     setDate('');
     setKm('');
 }
